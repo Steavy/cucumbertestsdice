@@ -33,6 +33,8 @@ public class testDice {
         RestAssured.baseURI = serverName + ":" + serverPort + servicePath;
         response = given().contentType("application/json").
                 queryParam("dice", String.join(",",   diceList )).when().post("") ;
+        Assert.assertEquals("A different response code was returned while" +
+                " querying the oracle ",200 ,response.statusCode());
         System.out.println(response.getBody().asString());
    }
 
@@ -42,6 +44,7 @@ public class testDice {
         String responseBody = response.getBody().asString();
         JsonPath jsonPath = JsonPath.from(responseBody);
         int responseValue = jsonPath.get("theOracleSays");
-        Assert.assertEquals(expectedOracleResponse, responseValue);
+        Assert.assertEquals( "The response number received " +
+                "did not match the number expected",expectedOracleResponse, responseValue);
    }
 }

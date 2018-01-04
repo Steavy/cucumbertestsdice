@@ -26,6 +26,6 @@ Feature:  test dice outcome
     Then I expect the oracle to return 6
 
   Scenario: Test with another number
-    Given I have a dice cast at 0
+    Given I have a dice cast at 2
     When I query the oracle
     Then I expect the oracle to return 0
